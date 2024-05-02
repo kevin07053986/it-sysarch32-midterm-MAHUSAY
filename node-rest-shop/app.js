@@ -9,11 +9,11 @@ const orderRoutes = require('./api/routes/orders');
 
 mongoose.connect(
     "mongodb+srv://kevinmahusay22:" + encodeURIComponent(process.env.MONGO_ATLAS_PW) +
-    "@node-rest-shop.oayz2mk.mongodb.net/?retryWrites=true&w=majority&appName=node-rest-shop",
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    }
+    "@node-rest-shop.oayz2mk.mongodb.net/?retryWrites=true&w=majority&appName=node-rest-shop" //,
+    // {
+    //     useNewUrlParser: true,
+    //     useUnifiedTopology: true
+    // }
 );
 
 
