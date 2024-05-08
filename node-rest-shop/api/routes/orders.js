@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
     .then(docs => {
         res.status(200).json({
             count: docs.length,
-            orders: docs.map ( doc => {
+            orders: docs.map (doc => {
                 return {
                     _id: doc._id,
                     product: doc.product,
@@ -41,7 +41,7 @@ router.post("/", (req, res, next) => {
     Product.findById(req.body.productId)
     .then(product => {
         if (!product) {
-            return res.status(404).json ({
+            return res.status(404).json({
                 message: "Product not found"
             });
         }
@@ -90,17 +90,55 @@ router.post("/", (req, res, next) => {
 });
 
 router.get('/:orderId', (req, res, next) => {
-    res.status(200).json({
-        message: 'Order details',
-        orderId: req.params.orderId
+    Order.findById(req.params.orderId)
+    .exec()
+    .then(order => {
+        if (!order) {
+            return res.status(404).json({
+                message: "Order not found"
+            });            
+        }
+        res.status(200).json({
+            order: order,
+            request: {
+                type: 'GET',
+                url: 'http://localhost:3000/orders'
+            }
+        });
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
     });
+    // res.status(200).json({
+    //     message: 'Order details',
+    //     orderId: req.params.orderId
+    // });
 });
 
 router.delete('/:orderId', (req, res, next) => {
-    res.status(200).json({
-        message: 'Order deleted',
-        orderId: req.params.orderId
+    Order.deleteOne({ _id: req.params.orderId})
+    .exec()
+    .then(result =>{
+        res.status(200).json({
+            message: 'Order deleted',
+            request: {
+                type: 'POST',
+                url: 'http://localhost:3000/orders',
+                body: { productId: "ID", quantity: "Number" }
+            }
+        });
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
     });
+    // res.status(200).json({
+    //     message: 'Order deleted',
+    //     orderId: req.params.orderId
+    // });
 });
 
 module.exports = router;
