@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background-color: #f7f7f7;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.login {
+  /* background-image: url("https://scontent-mnl1-2.xx.fbcdn.net/v/t39.30808-6/369700795_1387829755106570_2854376524710357400_n.jpg?stp=cp6_dst-jpg&_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeECfABmtPewJnc4dxtdeydg0Tk6eb14sBjROTp5vXiwGIeQVMhIDrQkSct53Msy8SJEgDQgN5lHVW-F1Ysyyh2H&_nc_ohc=ULQvCZOBC9YAb5bYYY5&_nc_ht=scontent-mnl1-2.xx&oh=00_AfAcBMfs06MWz-33LtZIgjX7KL3O5qWwksv6_ODdrJE0qg&oe=662BC144"); */
+  @apply bg-gradient-to-br from-[#074173] to-gray-500;
+}
+.blurry {
+  @apply backdrop-blur-3xl bg-white/5  inset-0 absolute;
+}
+
+.form-group {
+  @apply rounded border-2 border-transparent transition-all duration-300;
+}
+.form-group > label {
+  @apply text-lg text-white/90;
+}
+.form-group > input {
+  @apply p-2.5 rounded text-black bg-white/85;
+}
+.form-group > input:focus {
+  @apply outline-none;
+}
+
+
+.error-message {
+  @apply bg-red-700 text-white/90 font-medium py-3 rounded text-center;
+}
+
+
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  @apply gap-5;
+}
+
+
+
+.product-view > button {
+  @apply py-2 px-6 border-[1.5px] border-gray-300;
+}
+
+.active-btn {
+  @apply bg-red-800 text-white/90;
+}
+
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee {
+  position: absolute;
+  right: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  animation: marquee 7s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    right: 0;
+  }
+  100% {
+    right: 100%;
+  }
+}
